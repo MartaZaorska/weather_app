@@ -1,6 +1,5 @@
 import {DAYS, THEME, ICONS} from "./constants";
 
-
 function formatDate(dt, timezoneOffset){
   const date = new Date(dt * 1000 + timezoneOffset * 1000 + new Date().getTimezoneOffset() * 60000);
   return {
@@ -9,7 +8,7 @@ function formatDate(dt, timezoneOffset){
   }
 }
 
-function formatTime(dt, timezoneOffset){
+export function formatTime(dt, timezoneOffset){
   const date = new Date(dt * 1000 + timezoneOffset * 1000 + new Date().getTimezoneOffset() * 60000);
   return `${date.getHours()}`.padStart(2,"0") + ":" +`${date.getMinutes()}`.padStart(2, "0");
 }
@@ -92,7 +91,6 @@ export function prepareWeatherData(data){
       pressure: {name: "Ciśnienie", value: `${item.pressure} hPa`},
     }
   }));
-
 
   return {
     timezone_offset: data.timezone_offset,

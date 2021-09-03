@@ -1,8 +1,8 @@
 function Forecast() {
   return (
-    <div>
-      <p>Forecast</p>
-    </div>
+    <section className="forecast">
+      <p>forecast</p>
+    </section>
   )
 }
 
