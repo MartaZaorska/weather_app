@@ -8,25 +8,26 @@ function formatDate(dt, timezoneOffset){
   }
 }
 
-export function formatTime(dt, timezoneOffset){
-  const date = new Date(dt * 1000 + timezoneOffset * 1000 + new Date().getTimezoneOffset() * 60000);
+export function formatTime(timezoneOffset, dt = 0){
+  const tmp = dt ? dt * 1000 : Date.now();
+  const date = new Date(tmp + timezoneOffset * 1000 + new Date().getTimezoneOffset() * 60000);
   return `${date.getHours()}`.padStart(2,"0") + ":" +`${date.getMinutes()}`.padStart(2, "0");
 }
 
-function getTheme(data, clouds, timezoneOffset){
-  const now = new Date(getTimeNow(timezoneOffset)).getHours();
-  const moonrise = +formatTime(data.moonrise, timezoneOffset).slice(0,2);
-  const moonset = +formatTime(data.moonset, timezoneOffset).slice(0,2);
+function getTheme(data, timezoneOffset){
+  const now = +formatTime(timezoneOffset).slice(0,2);
+  const sunset = +formatTime(timezoneOffset, data.sunset).slice(0,2);
+  const sunrise = +formatTime(timezoneOffset, data.sunrise).slice(0,2);
 
-  if(moonset <= now && now < 12){
-    return clouds <= 40 ? THEME.light.sunny : THEME.light.cloudy;
+  if(sunrise <= now && now < 14){
+    return data.clouds <= 40 ? THEME.light.sunny : THEME.light.cloudy;
   }
   
-  if(now >= 12 && now < moonrise){
-    return clouds <= 40 ? THEME.dark.sunny : THEME.dark.cloudy;
+  if(now >= 14 && now < sunset){
+    return data.clouds <= 40 ? THEME.dark.sunny : THEME.dark.cloudy;
   }
 
-  if(now >= moonrise && now < 1) return THEME.light.night;
+  if(now >= sunset && now < 22) return THEME.light.night;
   
   return THEME.dark.night;
 }
@@ -58,12 +59,12 @@ export function prepareLocationData(data){
 export function prepareWeatherData(data){
   const current = {
     date: formatDate(data.current.dt, data.timezone_offset),
-    sunrise: formatTime(data.current.sunrise, data.timezone_offset),
-    sunset: formatTime(data.current.sunset, data.timezone_offset),
+    sunrise: formatTime(data.timezone_offset, data.current.sunrise),
+    sunset: formatTime(data.timezone_offset, data.current.sunset),
     temp: `${data.current.temp.toFixed(0)}°C`,
     description: capitalizeFirstLetter(data.current.weather[0].description),
     icon: getIcon(data.current.weather[0].icon, data.daily[0].moon_phase),
-    theme: getTheme(data.daily[0], data.current.clouds, data.timezone_offset),
+    theme: getTheme(data.current, data.timezone_offset),
     properties: {
       feels_like: {name: "Odczuwalna", value: `${data.current.feels_like.toFixed(0)}°C`},
       min_max: {name: "Min/Max", value: `${data.daily[0].temp.min.toFixed(0)}/${data.daily[0].temp.max.toFixed(0)}°C`},
@@ -98,9 +99,3 @@ export function prepareWeatherData(data){
     daily
   }
 }
-
-export function getTimeNow(timezoneOffset){
-  const date = new Date(Date.now() + timezoneOffset * 1000 + new Date().getTimezoneOffset() * 60000);
-  return date.getTime();
-}
-

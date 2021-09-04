@@ -30,6 +30,7 @@ export function Provider({children}){
   const updateCity = (data) => {
     const updatedCities = cities.map(item => item.city === data.city && item.country === data.country ? data : item);
     setCities(updatedCities.sort((a,b) => b.daily.length - a.daily.length));
+    setActive(data);
   }
 
   const changeActive = (data) => setActive(data);

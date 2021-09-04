@@ -1,11 +1,11 @@
 import {memo} from 'react';
-import {MdClose} from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
+import {MdClose} from 'react-icons/md';
 
 import { useAppContext } from '../context/index';
 
 function City({item}) {
-  const {changeActive} = useAppContext();
+  const {changeActive, deleteCity} = useAppContext();
   const history = useHistory();
 
   const clickHandler = () => {
@@ -13,11 +13,16 @@ function City({item}) {
     history.push("/forecast");
   }
 
+  const deleteHandler = e => {
+    e.stopPropagation();
+    deleteCity(item);
+  }
+
   return (
     <section onClick={clickHandler} className={item.current ? "city" : "city center"}>
         {item.current ? (
           <div>
-            <h1><img src={item.current.icon} alt="weather icon" /> <span>{item.current.temp}</span></h1>
+            <h1><img src={item.current.icon} alt={item.current.description} /> <span>{item.current.temp}</span></h1>
             <h3>{item.current.description}</h3>
             <p>{item.city}, {item.country}</p>
           </div>
@@ -26,7 +31,7 @@ function City({item}) {
             <p>{item.city}, {item.country}</p>
           </div>
         )}
-      <button><MdClose className="icon" /></button>
+      <button onClick={deleteHandler}><MdClose className="icon" /></button>
     </section>
   )
 }

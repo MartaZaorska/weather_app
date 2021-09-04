@@ -1,7 +1,12 @@
 function Loader() {
   return (
-    <div>
-      <p>loader</p>
+    <div className="loader">
+      <div className="content">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   )
 }
