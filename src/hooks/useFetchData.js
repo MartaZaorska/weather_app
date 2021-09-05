@@ -6,7 +6,7 @@ const useFetchData = (url) => {
   const [error, setError] = useState(undefined);
 
   useEffect(() => {
-    if(url){
+  if(url){
       setLoading(true);
       fetch(url).then(res => res.json()).then(resData => {
         setData(resData);

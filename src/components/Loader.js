@@ -1,7 +1,7 @@
 function Loader() {
   return (
     <div className="loader">
-      <div className="content">
+      <div className="loader__content">
         <div></div>
         <div></div>
         <div></div>

@@ -1,6 +1,6 @@
-import {memo} from 'react';
+import { memo } from 'react';
 import { useHistory } from 'react-router-dom';
-import {MdClose} from 'react-icons/md';
+import { MdClose } from 'react-icons/md';
 
 import { useAppContext } from '../context/index';
 
@@ -31,7 +31,7 @@ function City({item}) {
             <p>{item.city}, {item.country}</p>
           </div>
         )}
-      <button onClick={deleteHandler}><MdClose className="icon" /></button>
+      <button aria-label="Delete city" onClick={deleteHandler}><MdClose className="icon" /></button>
     </section>
   )
 }

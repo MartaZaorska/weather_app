@@ -8,10 +8,10 @@ import useFetchData from '../hooks/useFetchData';
 
 function Form() {
   const [url, setUrl] = useState("");
-  const { addCity } = useAppContext();
-  const history = useHistory();
-
+  const {addCity} = useAppContext();
   const {data} = useFetchData(url);
+
+  const history = useHistory();
 
   useEffect(() => {
     if(data?.length > 0){
@@ -36,13 +36,14 @@ function Form() {
   return (
     <form className="form" onSubmit={submitHandler}>
       <input 
+        tabindex="0"
         type="text" 
         name="city"
         placeholder="Miasto" 
         onFocus={e => e.target?.parentNode?.classList.add("active")}
         onBlur={e => e.target?.parentNode?.classList.remove("active")}
       />
-      <button type="submit"><IoSearchOutline className="icon" /></button>
+      <button type="submit" aria-label="Search city"><IoSearchOutline className="icon" /></button>
     </form>
   )
 }

@@ -2,8 +2,8 @@ import { Suspense, lazy } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { useAppContext } from './context/index';
-
 import Loader from './components/Loader';
+
 const Main = lazy(() => import("./pages/Main"));
 const Forecast = lazy(() => import("./pages/Forecast"));
 

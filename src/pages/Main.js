@@ -17,7 +17,7 @@ function Main() {
             <City key={`main-${item.lat}-${item.lon}`} item={item} />
           ))}
         </section>
-        <p className="copyright">&copy; Created by <a target="_blank" rel="noreferrer" href="https://martazaorska.github.io/portfolio/">Marta Zaorska</a> {new Date().getFullYear()}</p>
+        <p className="copyright">&copy; Created by <a className="bold" target="_blank" rel="noreferrer" href="https://martazaorska.github.io/portfolio/">Marta Zaorska</a> {new Date().getFullYear()}</p>
       </section>
       <section className="main__image"><img src={image} alt="nature" /></section>
     </>

@@ -1,4 +1,4 @@
-import {DAYS, THEME, ICONS} from "./constants";
+import { DAYS, THEME, ICONS } from "./constants";
 
 function formatDate(dt, timezoneOffset){
   const date = new Date(dt * 1000 + timezoneOffset * 1000 + new Date().getTimezoneOffset() * 60000);
@@ -6,12 +6,6 @@ function formatDate(dt, timezoneOffset){
     day: DAYS[date.getDay()],
     normal: `${date.getDate()}`.padStart(2, "0") + "." + `${date.getMonth() + 1}`.padStart(2, "0") + `.${date.getFullYear()}`
   }
-}
-
-export function formatTime(timezoneOffset, dt = 0){
-  const tmp = dt ? dt * 1000 : Date.now();
-  const date = new Date(tmp + timezoneOffset * 1000 + new Date().getTimezoneOffset() * 60000);
-  return `${date.getHours()}`.padStart(2,"0") + ":" +`${date.getMinutes()}`.padStart(2, "0");
 }
 
 function getTheme(data, timezoneOffset){
@@ -44,6 +38,13 @@ function getIcon(name, moon_phase){
 function capitalizeFirstLetter(text){
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
+
+export function formatTime(timezoneOffset, dt = 0){
+  const tmp = dt ? dt * 1000 : Date.now();
+  const date = new Date(tmp + timezoneOffset * 1000 + new Date().getTimezoneOffset() * 60000);
+  return `${date.getHours()}`.padStart(2,"0") + ":" +`${date.getMinutes()}`.padStart(2, "0");
+}
+
 
 export function prepareLocationData(data){
   return {
