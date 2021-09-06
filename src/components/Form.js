@@ -36,7 +36,7 @@ function Form() {
   return (
     <form className="form" onSubmit={submitHandler}>
       <input 
-        tabindex="0"
+        tabIndex="0"
         type="text" 
         name="city"
         placeholder="Miasto" 

@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+
+import { CONTAINER_VARIANTS } from '../constants';
 import { useAppContext } from '../context/index';
 import { prepareWeatherData } from '../utils';
 import useFetchData from '../hooks/useFetchData';
@@ -34,14 +37,20 @@ function Forecast() {
   if(error) return <Error />
 
   return (
-    <section className="forecast" style={{backgroundImage: active.current.theme.background, color: active.current.theme.color}}>
+    <motion.section 
+      className="forecast" 
+      style={{backgroundImage: active.current.theme.background, color: active.current.theme.color}}
+      variants={CONTAINER_VARIANTS}
+      initial="hidden"
+      animate="visible"
+    >
       <Header city={active.city} />
       <div className="content">
         <Current />
         <Daily />
         <Viewed />
       </div>
-    </section>
+    </motion.section>
   )
 }
 
