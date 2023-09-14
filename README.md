@@ -27,7 +27,7 @@ See online my project: https://weather-app-martazaorska.netlify.app/
 
 ## Setup
 
-Clone this repo to your desktop, next go to root directory and run npm install to install all dependencies. When the dependencies are installed, you can run npm start to start the application (at http://localhost:5173/).
+Clone this repo to your desktop, next go to root directory and run npm install to install all dependencies. When the dependencies are installed, you can run "npm run dev" to start the application (at http://localhost:5173/).
 
 ## Contact
 
