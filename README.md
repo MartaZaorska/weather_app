@@ -11,7 +11,6 @@
 
 ## General info
 The application which gives the user a check of the weather for many cities. The user can check the current weather and the forecast for the next 7 days.
-This project was bootstrapped with Create React App.
 The API data used on the site to download the weather data comes from [OpenWeatherMap](https://openweathermap.org/).
 
 Image from the home page comes from [unDraw](https://undraw.co/)
